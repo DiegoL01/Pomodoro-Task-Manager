@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { TaskProvider } from "@/src/contexts/TaskContext";
+import { UserProvider } from "@/src/contexts/UserContext";
 import { Header } from "@/src/components/Layaut/Header";
 import "./globals.css";
 
@@ -33,10 +34,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <TaskProvider>
-          <Header />
-          {children}
-        </TaskProvider>
+        <UserProvider>
+          <TaskProvider>
+            <Header />
+            {children}
+          </TaskProvider>
+        </UserProvider>
       </body>
     </html>
   );

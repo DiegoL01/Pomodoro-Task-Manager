@@ -6,7 +6,7 @@ import { useTask } from "@/src/contexts/TaskContext";
 const EditTaskPage = () => {
   const router = useRouter();
   const params = useParams();
-  const id = Number(params.id);
+  const id = params.id as string;
   const { tasks, updateTask } = useTask();
 
   const task = tasks.find((t) => t.id === id);
@@ -47,17 +47,17 @@ const EditTaskPage = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    updateTask(task.id, form.title, form.description);
+    await updateTask(task.id, form.title, form.description);
     setIsEditMode(false); // Vuelve a modo lectura tras guardar
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
+          <h1 className="text-3xl font-bold text-center">Task Details</h1>
       <div className="w-full max-w-lg bg-gray-800 rounded-lg shadow-lg p-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-center">Task Details</h1>
           <button
             className="ml-4 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white text-sm"
             onClick={() => setIsEditMode((prev) => !prev)}
@@ -124,7 +124,21 @@ const EditTaskPage = () => {
             </div>
           </div>
         )}
-        <div className="flex justify-end mt-8">
+        <div className="flex justify-center gap-5 mt-8">
+          <button
+            type="button"
+            onClick={() => router.push("/")}
+            className="bg-green-500 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+          >
+            Complete
+          </button>
+          <button
+            type="button"
+            onClick={() => router.push("/")}
+            className="bg-blue-500 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
+          >
+            Pomodoro
+          </button>
           <button
             type="button"
             onClick={() => router.push("/")}
