@@ -17,8 +17,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next-Crud-App",
-  description: "Next-Crud-App",
+  title: "Notas + Pomodoro",
+  description: "Notas + Pomodoro",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
