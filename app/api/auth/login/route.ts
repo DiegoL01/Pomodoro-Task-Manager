@@ -38,9 +38,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Retornar usuario sin contraseña
-    const { password: _, ...userWithoutPassword } = user
-    void _
-
+    const { password:__, ...userWithoutPassword } = user
+    void __
     return NextResponse.json(userWithoutPassword)
   } catch (error) {
     console.error('Error al hacer login:', error)
