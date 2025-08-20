@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
 
     // Retornar usuario sin contraseña
     const { password: _, ...userWithoutPassword } = user
+    void _
 
     return NextResponse.json(userWithoutPassword)
   } catch (error) {

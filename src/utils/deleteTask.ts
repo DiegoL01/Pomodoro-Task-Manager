@@ -4,7 +4,7 @@ export function useDeleteTask() {
   const { deleteTask } = useTask();
 
   // Retorna una función que puedes asignar al onClick del botón Delete
-  return (id: number) => {
+  return (id: string) => {
     deleteTask(id);
   };
 }

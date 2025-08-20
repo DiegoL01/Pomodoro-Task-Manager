@@ -4,15 +4,16 @@ import { prisma } from '@/src/lib/prisma'
 // PUT /api/tasks/[id] - Actualizar una tarea
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     const body = await request.json()
     const { title, description, completed } = body
+    const { id } = await context.params
 
     const task = await prisma.task.update({
       where: {
-        id: params.id
+        id: id
       },
       data: {
         title,
@@ -34,12 +35,13 @@ export async function PUT(
 // DELETE /api/tasks/[id] - Eliminar una tarea
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await context.params
     await prisma.task.delete({
       where: {
-        id: params.id
+        id: id
       }
     })
 

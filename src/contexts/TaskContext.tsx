@@ -1,5 +1,5 @@
 "use client"
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { useUser } from './UserContext';
 
 type Task = {
@@ -28,9 +28,9 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     const [isLoading, setIsLoading] = useState(false)
     const { user } = useUser()
 
-    const fetchTasks = async () => {
+    const fetchTasks = useCallback(async () => {
         if (!user) return
-        
+
         setIsLoading(true)
         try {
             const response = await fetch(`/api/tasks?userId=${user.id}`)
@@ -43,7 +43,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
         } finally {
             setIsLoading(false)
         }
-    }
+    }, [user])
 
     useEffect(() => {
         if (user) {
@@ -51,7 +51,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
         } else {
             setTasks([])
         }
-    }, [user])
+    }, [user, fetchTasks])
 
     const createTask = async (title: string, description: string) => {
         if (!user) return

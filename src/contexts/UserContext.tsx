@@ -52,7 +52,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       } else {
         return { success: false, error: data.error }
       }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'Error de conexión' }
     }
   }
@@ -76,7 +76,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
       } else {
         return { success: false, error: data.error }
       }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'Error de conexión' }
     }
   }
