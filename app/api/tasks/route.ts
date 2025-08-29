@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/src/lib/prisma'
+import { prisma } from '@/src/lib/prisma-dev'
 
 // GET /api/tasks - Obtener todas las tareas de un usuario
 export async function GET(request: NextRequest) {

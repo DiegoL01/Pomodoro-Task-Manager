@@ -3,11 +3,12 @@ import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useTask } from "@/src/contexts/TaskContext";
 
+
 const EditTaskPage = () => {
   const router = useRouter();
   const params = useParams();
   const id = params.id as string;
-  const { tasks, updateTask } = useTask();
+  const { tasks, updateTask,toggleTaskCompleted } = useTask();
 
   const task = tasks.find((t) => t.id === id);
 
@@ -51,6 +52,7 @@ const EditTaskPage = () => {
     e.preventDefault();
     await updateTask(task.id, form.title, form.description);
     setIsEditMode(false); // Vuelve a modo lectura tras guardar
+    router.push("/")
   };
 
   return (
@@ -69,7 +71,7 @@ const EditTaskPage = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="title" className="block text-sm font-medium mb-2 text-gray-300">
-                Title
+                Título
               </label>
               <input
                 id="title"
@@ -83,7 +85,7 @@ const EditTaskPage = () => {
             </div>
             <div>
               <label htmlFor="description" className="block text-sm font-medium mb-2 text-gray-300">
-                Description
+                Descripción
               </label>
               <textarea
                 id="description"
@@ -100,14 +102,14 @@ const EditTaskPage = () => {
                 type="submit"
                 className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
               >
-                Save Changes
+                Guardar Cambios
               </button>
               <button
                 type="button"
                 onClick={() => { setIsEditMode(false); setForm({ title: task.title, description: task.description }); }}
                 className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
               >
-                Cancel
+                Cancelar
               </button>
             </div>
           </form>
@@ -120,17 +122,21 @@ const EditTaskPage = () => {
             <div className="mt-8 p-4 bg-gray-900 rounded-lg border border-gray-700">
               <h2 className="text-lg font-semibold mb-2 text-gray-200">Task Details</h2>
               {/* <p className="text-gray-400"><span className="font-medium text-gray-300">ID:</span> {task.id}</p> */}
-              <p className="text-gray-400"><span className="font-medium text-gray-300">Completed :</span>{task.completed ? " ✅ Completed" : " ❌ Pending"}</p>
+              <p className="text-gray-400"><span className="font-medium text-gray-300">Completed :</span>{task.completed ? " ✅ Completado" : " ❌ Pendiente"}</p>
             </div>
           </div>
         )}
         <div className="flex justify-center gap-5 mt-8">
           <button
             type="button"
-            onClick={() => router.push("/")}
+            onClick={(e) => {
+              e.preventDefault();
+              toggleTaskCompleted(task.id);
+              router.push("/")}
+            }
             className="bg-green-500 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
           >
-            Complete
+            Completar
           </button>
           <button
             type="button"
@@ -144,7 +150,7 @@ const EditTaskPage = () => {
             onClick={() => router.push("/")}
             className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
           >
-            Back
+          Volver
           </button>
         </div>
       </div>

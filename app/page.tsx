@@ -3,16 +3,8 @@ import { useTask } from "@/src/contexts/TaskContext";
 import { useUser } from "@/src/contexts/UserContext";
 import { TaskCard } from "@/src/components/TaskCard";
 import { NoTasks } from "@/src/components/Task/NoTasks";
+import { Task } from "@/src/interface/Task";
 
-export type Task = {
-  id: string,
-  title: string,
-  description: string,
-  completed: boolean,
-  userId: string,
-  createdAt: string,
-  updatedAt: string
-}
 
 export default function Home() {
   const { tasks, isLoading } = useTask()

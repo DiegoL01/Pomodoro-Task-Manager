@@ -3,22 +3,23 @@ import React, { createContext, useState, useContext, useEffect, useCallback } fr
 import { useUser } from './UserContext';
 
 type Task = {
-  id: string;
-  title: string;
-  description: string;
-  completed: boolean;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
+    id: string;
+    title: string;
+    description: string;
+    completed: boolean;
+    userId: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 type TaskContextType = {
-  tasks: Task[];
-  createTask: (title: string, description: string) => Promise<void>;
-  deleteTask: (id: string) => Promise<void>;
-  updateTask: (id: string, title: string, description: string, completed?: boolean) => Promise<void>;
-  fetchTasks: () => Promise<void>;
-  isLoading: boolean;
+    tasks: Task[];
+    createTask: (title: string, description: string) => Promise<void>;
+    deleteTask: (id: string) => Promise<void>;
+    updateTask: (id: string, title: string, description: string, completed?: boolean) => Promise<void>;
+    fetchTasks: () => Promise<void>;
+    toggleTaskCompleted: (id: string) => Promise<void>
+    isLoading: boolean;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined)
@@ -108,7 +109,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
 
             if (response.ok) {
                 const updatedTask = await response.json()
-                setTasks(prev => prev.map(task => 
+                setTasks(prev => prev.map(task =>
                     task.id === id ? updatedTask : task
                 ))
             }
@@ -116,15 +117,21 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
             console.error('Error al actualizar tarea:', error)
         }
     }
+    const toggleTaskCompleted = async (id: string) => {
+        const task = tasks.find(t => t.id === id)
+        if (!task) return
+        await updateTask(id, task.title, task.description ?? '', !task.completed)
+    }
 
     return (
-        <TaskContext.Provider value={{ 
-            tasks, 
-            createTask, 
-            deleteTask, 
-            updateTask, 
+        <TaskContext.Provider value={{
+            tasks,
+            createTask,
+            deleteTask,
+            updateTask,
             fetchTasks,
-            isLoading 
+            toggleTaskCompleted,
+            isLoading
         }}>
             {children}
         </TaskContext.Provider>

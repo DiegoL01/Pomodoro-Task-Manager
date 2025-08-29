@@ -52,8 +52,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
       } else {
         return { success: false, error: data.error }
       }
-    } catch (_error) {
-      return { success: false, error: 'Error de conexión : ' + _error }
+    } catch (error) {
+      return { success: false, error: 'Error de conexión : ' + error }
     }
   }
 
@@ -76,8 +76,8 @@ export function UserProvider({ children }: { children: ReactNode }) {
       } else {
         return { success: false, error: data.error }
       }
-    } catch (_error) {
-      return { success: false, error: 'Error de conexión : ' + _error }
+    } catch (error) {
+      return { success: false, error: 'Error de conexión : ' + error }
     }
   }
 
@@ -86,11 +86,11 @@ export function UserProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('user')
   }
 
-      return (
-      <UserContext.Provider value={{ user, login, register, logout, isLoading }}>
-        {children}
-      </UserContext.Provider>
-    )
+  return (
+    <UserContext.Provider value={{ user, login, register, logout, isLoading }}>
+      {children}
+    </UserContext.Provider>
+  )
 }
 
 export function useUser() {

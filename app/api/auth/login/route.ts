@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/src/lib/prisma'
+import { prisma } from '@/src/lib/prisma-dev'
 import bcrypt from 'bcryptjs'
 
 export async function POST(request: NextRequest) {
@@ -38,8 +38,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Retornar usuario sin contraseña
-    const { password:__, ...userWithoutPassword } = user
-    void __
+    const { password:_password, ...userWithoutPassword } = user
+    void _password
     return NextResponse.json(userWithoutPassword)
   } catch (error) {
     console.error('Error al hacer login:', error)

@@ -1,7 +1,9 @@
 import { AiTwotoneDelete } from "react-icons/ai";
-import type { Task } from '@/app/page'
+import type { Task } from '@/src/interface/Task'
 import { useTask } from "../contexts/TaskContext";
 import { useRouter } from "next/navigation"; 
+import { CompletarButton } from "@/src/components/Task/CompletarButton";
+
 export const TaskCard = ({ task }: { task: Task }) => {
     const {push} = useRouter()
     const { deleteTask } = useTask()
@@ -18,20 +20,15 @@ export const TaskCard = ({ task }: { task: Task }) => {
                         className=' flex items-center gap-1 ml-1  border border-1 text-gray-300 px-2 py-1 rounded-2xl hover:bg-gray-700 transition-colors'
                     >
                         <AiTwotoneDelete />
-                        Delete
+                        Borrar
                     </button>
                 </div>
                 <p className='text-sm text-gray-300 leading-relaxed break-words line-clamp-3'>{task.description}</p>
             </div>
             <div className="mt-6 pt-4 border-t border-gray-700">
                 <div className="flex items-center justify-between">
-                    <span className='text-sm font-medium text-gray-400'>Status:</span>
-                    <span className={`text-sm font-semibold ml-2 px-3 py-1 rounded-full ${task.completed
-                            ? 'bg-green-600 text-green-100'
-                            : 'bg-red-600 text-red-100'
-                        }`}>
-                        {task.completed ? "✅ Completed" : "❌ Pending"}
-                    </span>
+                    <span className='text-sm font-medium text-gray-400'>Estado :</span>
+                   <CompletarButton task={task}/>
                 </div>
             </div>
         </div>

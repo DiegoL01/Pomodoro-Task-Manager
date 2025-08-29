@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/src/lib/prisma'
+import { prisma } from '@/src/lib/prisma-dev'
 
 // PUT /api/tasks/[id] - Actualizar una tarea
 export async function PUT(
