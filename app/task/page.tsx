@@ -15,7 +15,7 @@ const NewTask = () => {
   const handlerChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setTask({ ...task, [name]: value })
-    console.log(task)
+    
   }
   const handlerClick = () => {
     setTask({ title: "", description: "" })

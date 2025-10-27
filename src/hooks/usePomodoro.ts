@@ -1,4 +1,5 @@
-// Hook usePomodoro.ts
+
+
 import { useState, useEffect } from 'react';
 
 const usePomodoro = (workTime = 1500, shortBreak = 300, longBreak = 900) => {
