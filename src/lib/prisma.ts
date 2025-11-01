@@ -1,11 +1,21 @@
 import { PrismaClient } from '@prisma/client'
 
 declare global {
-  var prisma: PrismaClient | undefined ;
+  // eslint-disable-next-line no-var
+  var prisma: PrismaClient | undefined;
 }
 
-export const prisma = global.prisma || new PrismaClient()
+/**
+ * Create a PrismaClient with sensible defaults:
+ * - logs more verbosely in development
+ * - uses a global cache to avoid hot-reload multiple clients in dev (Next.js)
+ */
+const client = new PrismaClient({
+  log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+})
 
+export const prisma = global.prisma || client
 
-if ( process.env.NODE_ENV !== "production") {global.prisma = prisma;}
-// id de el commit al que quiero regresar la rama main 001ec69
+if (process.env.NODE_ENV !== 'production') {
+  global.prisma = prisma
+}

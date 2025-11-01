@@ -2,13 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useTask } from "@/src/contexts/TaskContext";
-
+import { TareaNoEncontrada } from "@/src/components/EditPage/NotFTaskFound/TareaNoEncontrada"
+import { IsEditMode } from "@/src/components/EditPage/IsEditMode/IsEditMode"
+import { ReadMode } from "@/src/components/EditPage/ReadMode/ReadMode";
 
 const EditTaskPage = () => {
   const router = useRouter();
   const params = useParams();
   const id = params.id as string;
-  const { tasks, updateTask,toggleTaskCompleted } = useTask();
+  const { tasks, updateTask, toggleTaskCompleted } = useTask();
 
   const task = tasks.find((t) => t.id === id);
 
@@ -27,17 +29,7 @@ const EditTaskPage = () => {
 
   if (!task) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-center">
-          <h2 className="text-2xl font-bold mb-4">Task not found</h2>
-          <button
-            className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white"
-            onClick={() => router.push("/")}
-          >
-            Go Home
-          </button>
-        </div>
-      </div>
+      <TareaNoEncontrada />
     );
   }
 
@@ -57,7 +49,7 @@ const EditTaskPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-4">
-          <h1 className="text-3xl font-bold text-center">Task Details</h1>
+      <h1 className="text-3xl font-bold text-center mb-3">Detalles de la Tarea</h1>
       <div className="w-full max-w-lg bg-gray-800 rounded-lg shadow-lg p-8">
         <div className="flex justify-between items-center mb-8">
           <button
@@ -68,63 +60,11 @@ const EditTaskPage = () => {
           </button>
         </div>
         {isEditMode ? (
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="title" className="block text-sm font-medium mb-2 text-gray-300">
-                Título
-              </label>
-              <input
-                id="title"
-                name="title"
-                type="text"
-                value={form.title}
-                onChange={handleChange}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white break-words whitespace-pre-line"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium mb-2 text-gray-300">
-                Descripción
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={form.description}
-                onChange={handleChange}
-                rows={5}
-                className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white resize-none break-words whitespace-pre-line"
-                required
-              />
-            </div>
-            <div className="flex gap-4 pt-4">
-              <button
-                type="submit"
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
-              >
-                Guardar Cambios
-              </button>
-              <button
-                type="button"
-                onClick={() => { setIsEditMode(false); setForm({ title: task.title, description: task.description }); }}
-                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
-              >
-                Cancelar
-              </button>
-            </div>
-          </form>
+          // aqui es donde va el comoponente de editar
+          <IsEditMode handleSubmit={handleSubmit} handleChange={handleChange} form={form} setIsEditMode={setIsEditMode} setForm={setForm} task={task} />
         ) : (
-          <div className="space-y-6">
-            <div>
-              <h2 className="text-xl font-bold text-gray-100 mb-2 break-words whitespace-pre-line">{task.title}</h2>
-              <p className="text-gray-300 break-words whitespace-pre-line">{task.description}</p>
-            </div>
-            <div className="mt-8 p-4 bg-gray-900 rounded-lg border border-gray-700">
-              <h2 className="text-lg font-semibold mb-2 text-gray-200">Task Details</h2>
-              {/* <p className="text-gray-400"><span className="font-medium text-gray-300">ID:</span> {task.id}</p> */}
-              <p className="text-gray-400"><span className="font-medium text-gray-300">Completed :</span>{task.completed ? " ✅ Completado" : " ❌ Pendiente"}</p>
-            </div>
-          </div>
+         //aqui es donde va el componente de solo lectura
+         <ReadMode task={task}/>
         )}
         <div className="flex justify-center gap-5 mt-8">
           <button
@@ -132,7 +72,8 @@ const EditTaskPage = () => {
             onClick={(e) => {
               e.preventDefault();
               toggleTaskCompleted(task.id);
-              router.push("/")}
+              router.push("/")
+            }
             }
             className="bg-green-500 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
           >
@@ -150,7 +91,7 @@ const EditTaskPage = () => {
             onClick={() => router.push("/")}
             className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
           >
-          Volver
+            Volver
           </button>
         </div>
       </div>
