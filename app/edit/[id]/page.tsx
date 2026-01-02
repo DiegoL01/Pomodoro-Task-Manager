@@ -10,7 +10,7 @@ const EditTaskPage = () => {
   const router = useRouter();
   const params = useParams();
   const id = params.id as string;
-  const { tasks, updateTask, toggleTaskCompleted } = useTask();
+  const { tasks, updateTask} = useTask();
 
   const task = tasks.find((t) => t.id === id);
 
@@ -56,7 +56,7 @@ const EditTaskPage = () => {
             className="ml-4 px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded text-white text-sm"
             onClick={() => setIsEditMode((prev) => !prev)}
           >
-            {isEditMode ? "Switch to Read Mode" : "Switch to Edit Mode"}
+            {isEditMode ? "Cambiar a modo Lectura" : "Cambiar a modo Edición"}
           </button>
         </div>
         {isEditMode ? (
@@ -66,34 +66,7 @@ const EditTaskPage = () => {
          //aqui es donde va el componente de solo lectura
          <ReadMode task={task}/>
         )}
-        <div className="flex justify-center gap-5 mt-8">
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              toggleTaskCompleted(task.id);
-              router.push("/")
-            }
-            }
-            className="bg-green-500 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
-          >
-            Completar
-          </button>
-          <button
-            type="button"
-            onClick={() => router.push("/pomodoro")}
-            className="bg-blue-500 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
-          >
-            Pomodoro
-          </button>
-          <button
-            type="button"
-            onClick={() => router.push("/")}
-            className="bg-gray-600 hover:bg-gray-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-200"
-          >
-            Volver
-          </button>
-        </div>
+       
       </div>
     </div>
   );

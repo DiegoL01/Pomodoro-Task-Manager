@@ -1,11 +1,14 @@
 // Esquema de Prisma para SQLite (desarrollo local)
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  engineType      = "library"
 }
 
+// prisma/schema.prisma
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  
 }
 
 model User {

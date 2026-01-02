@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { TaskProvider } from "@/src/contexts/TaskContext";
 import { UserProvider } from "@/src/contexts/UserContext";
 import { Header } from "@/src/components/Layaut/Header";
+import { NetworkStatusModal } from "@/src/components/Layaut/NetworkStatusModal";
 import "./globals.css";
 
  
@@ -30,6 +31,7 @@ export default function RootLayout({
           <TaskProvider>
             <Header />
             {children}
+            <NetworkStatusModal/>
           </TaskProvider>
         </UserProvider>
       </body>

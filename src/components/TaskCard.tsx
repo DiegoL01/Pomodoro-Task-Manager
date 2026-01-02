@@ -23,7 +23,7 @@ export const TaskCard = ({ task }: { task: Task }) => {
                         Borrar
                     </button>
                 </div>
-                <p className='text-sm text-gray-300 leading-relaxed break-words line-clamp-3'>{task.description}</p>
+                <p className='text-sm text-gray-300 leading-relaxed break-words line-clamp-1'>{task.description}</p>
             </div>
             <div className="mt-6 pt-4 border-t border-gray-700">
                 <div className="flex items-center justify-between">

@@ -3,15 +3,17 @@ import React from 'react'
 import usePomodoro from "../../hooks/usePomodoro"
 import { formatTime } from '../../utils/pomodoroFunctions/formatTime'
 import Link from 'next/link'
+import { ActivityCharacter } from '@/app/pomodoro/ActivityCharacter'
 
 export const Pomodoro = () => {
-    const { time, currentPhase, isRunning, startTimer, pauseTimer, resetTimer } = usePomodoro(25 * 60, 5 * 60, 15 * 60)
+    const { time, currentPhase, isRunning, startTimer, pauseTimer, resetTimer , activity } = usePomodoro(25 * 60, 5 * 60, 15 * 60)
 
 
 
     return (
         <section className='flex flex-col items-center justify-center min-h-screen bg-[#f8fafc] dark:bg-gray-900 px-4'>
             <div className='w-full max-w-md p-8 rounded-2xl bg-white dark:bg-gray-800 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] backdrop-blur-sm bg-opacity-90 dark:bg-opacity-90 space-y-8'>
+                <div className="flex  justify-center items-center">
                 <h1 className={`text-4xl font-bold text-center mb-2 ${
                     currentPhase === 'work' 
                         ? 'text-blue-600 dark:text-blue-400' 
@@ -21,6 +23,8 @@ export const Pomodoro = () => {
                 }`}>
                     {currentPhase === 'work' ? 'Trabajo' : currentPhase === 'shortBreak' ? 'Descanso' : 'Descanso largo'}
                 </h1>
+                <ActivityCharacter activity={activity} className='w-20 h-20'/>
+                </div>
                 
                 <div className='relative w-48 h-48 mx-auto'>
                     <div className='absolute inset-0 rounded-full bg-gray-100 dark:bg-gray-700 shadow-inner'></div>
