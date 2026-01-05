@@ -4,13 +4,19 @@ import { useUser } from "@/src/contexts/UserContext";
 import { TaskCard } from "@/src/components/TaskCard";
 import { NoTasks } from "@/src/components/Task/NoTasks";
 import { Task } from "@/src/interface/Task";
-
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const { tasks, isLoading } = useTask()
   const { user, isLoading: userLoading } = useUser()
+  const [mounted, setMounted] = useState(false);
 
-  if (userLoading) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
+  if (!mounted || userLoading) {
     return (
       <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center">
         <div className="text-xl">Cargando...</div>
