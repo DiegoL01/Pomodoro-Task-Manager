@@ -3,9 +3,9 @@ import { useRouter } from 'next/navigation';
 import { useTask } from '@/src/contexts/TaskContext';
 
 
-export const ReadMode = ({task}: {task: {title: string, description: string, completed: boolean , id : any}}) => {
+export const ReadMode = ({task}: {task: {title: string, description: string, completed: boolean , id : string}}) => {
  const router = useRouter()
- const { tasks, updateTask, toggleTaskCompleted } = useTask();
+ const {  toggleTaskCompleted } = useTask();
 
   return (
     <div className="space-y-6">

@@ -1,6 +1,6 @@
 
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 type ActivityType = 'studying' | 'gym' | 'reading' | 'resting';
 
 const usePomodoro = (workTime = 1500, shortBreak = 300, longBreak = 900) => {
@@ -17,7 +17,7 @@ const usePomodoro = (workTime = 1500, shortBreak = 300, longBreak = 900) => {
         return activeActivities[Math.floor(Math.random() * activeActivities.length)];
     };
 
-    const updatePhase = () => {
+    const updatePhase = useCallback(() => {
         if (currentPhase === 'work') {
             setCurrentPhase('shortBreak');
         } else if (currentPhase === 'shortBreak') {
@@ -30,31 +30,33 @@ const usePomodoro = (workTime = 1500, shortBreak = 300, longBreak = 900) => {
         } else {
             setCurrentPhase('work');
         }
-    };
+    },[currentPhase, setCurrentPhase,cyclesCompleted, setCyclesCompleted,]);
   
     useEffect(() => {
         if (!isRunning) {
             return
         };
         const interval = setInterval(() => {
-            setTime((prev) => prev - 1);
-
-            if (time === 0) {
-                updatePhase();
-
-            }
+            setTime((prev) => {
+                if (prev <= 1) {
+                    // Si el tiempo llegó a 0, ejecutamos la fase
+                    updatePhase();
+                    return 0;
+                }
+                return prev - 1;
+            });
         }, 1000);
-
+    
         return () => clearInterval(interval);
-    }, [isRunning, time]);
-
+        // Quitamos 'time' de aquí para que el efecto no se reinicie cada segundo
+    }, [isRunning, updatePhase]);
 
     const startTimer = () => {
-        setIsRunning(true), 
+        setIsRunning(true); 
         setActivity(getRandomActivity());
     }
     const pauseTimer = () => {
-        setIsRunning(false), 
+        setIsRunning(false);
         setActivity('resting');
         
     }

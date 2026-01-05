@@ -42,8 +42,8 @@ export async function POST(request: NextRequest) {
     const { password:_password, ...userWithoutPassword } = user
     void _password
     return NextResponse.json(userWithoutPassword)
-  } catch (error : any) {
-    console.error('ERROR REAL EN LA API:', error.message) // ESTO aparecerá en tu terminal
+  } catch (error : unknown) {
+    console.error('ERROR REAL EN LA API:', error) 
     return NextResponse.json(
       { error: 'Error interno del servidor' },
       { status: 500 }

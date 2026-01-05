@@ -1,12 +1,9 @@
 "use client"
-import { AddTaskButton } from "@/src/components/Layaut/AddTaskButton";
 import { TasksCount } from "@/src/components/Layaut/TasksCount";
-import { usePathname } from "next/navigation";
 import { useUser } from "@/src/contexts/UserContext";
 import { HeaderRigth } from "./HeaderRigth";
 export const Header = () => {
-    const pathname = usePathname();
-    const { user, logout, isLoading } = useUser();
+    const { isLoading } = useUser();
 
     if (isLoading) {
         return (
@@ -18,7 +15,7 @@ export const Header = () => {
         );
     }
 
- 
+
 
     return (
         <header className="flex flex-col sm:flex-row justify-between items-center py-4 px-4 sm:px-6 lg:px-8 bg-gray-800 text-white gap-4 sm:gap-0">
@@ -26,8 +23,8 @@ export const Header = () => {
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-black">Task Manager</h1>
                 <TasksCount />
             </div>
-            <HeaderRigth/>
-            
+            <HeaderRigth />
+
         </header>
     );
 }
