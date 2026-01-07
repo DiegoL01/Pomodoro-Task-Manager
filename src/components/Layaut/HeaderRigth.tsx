@@ -11,22 +11,20 @@ export const HeaderRigth = () => {
     if (!user) {
         return (
             <header className="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8 bg-gray-800 text-white">
-                <div className="flex items-center">
-                    <h1 className="text-xl sm:text-2xl lg:text-3xl font-black">Task Manager</h1>
-                </div>
+              
                 <div className="flex items-center gap-2 sm:gap-4">
-                    <a
+                    <Link
                         href="/login"
                         className="px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 rounded-sm transition-colors"
                     >
                         Iniciar Sesión
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                         href="/register"
                         className="px-2 py-1 sm:px-3 sm:py-1 text-xs sm:text-sm bg-gray-600 hover:bg-gray-700 rounded-sm transition-colors"
                     >
                         Registrarse
-                    </a>
+                    </Link>
                 </div>
             </header>
         );
