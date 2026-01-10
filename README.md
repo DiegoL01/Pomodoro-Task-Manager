@@ -121,7 +121,17 @@ Durante el desarrollo de este proyecto, se resolvieron retos clave de ingenierí
 <div style="display: flex; gap: 8px; overflow-x: auto;">
 
   <img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/2d7cc527e97a5f007ab71233f3832f8303e739f2/public/Captura%20desde%202026-01-09%2022-08-18.png" width="300" />
-  <img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/2d7cc527e97a5f007ab71233f3832f8303e739f2/public/Captura%20desde%202026-01-09%2022-08-18.png" width="300" />
-  <img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/2d7cc527e97a5f007ab71233f3832f8303e739f2/public/Captura%20desde%202026-01-09%2022-08-18.png" width="300" />
+  
+<img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/815a305a17a2b3b89ace13e957a6a461892341ca/public/Captura%20desde%202026-01-09%2022-09-12.png" width="300" />
+  
+<img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/815a305a17a2b3b89ace13e957a6a461892341ca/public/Captura%20desde%202026-01-09%2022-10-05.png" width="300" />
+  
+<img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/815a305a17a2b3b89ace13e957a6a461892341ca/public/Captura%20desde%202026-01-09%2022-13-58.png" width="300" />
+
+<img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/815a305a17a2b3b89ace13e957a6a461892341ca/public/Captura%20desde%202026-01-09%2022-14-33.png" width="300" />
+
+<img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/815a305a17a2b3b89ace13e957a6a461892341ca/public/Captura%20desde%202026-01-09%2022-15-14.png" width="300" />
+    
+<img src="https://github.com/DiegoL01/Pomodoro-Task-Manager/blob/815a305a17a2b3b89ace13e957a6a461892341ca/public/Captura%20desde%202026-01-09%2022-15-30.png" width="300" />
 
 </div>
